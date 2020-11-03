@@ -1,15 +1,18 @@
-package io;
+package IO;
 
 /**
  * @author linjing
  * @date: Created in 2020/7/14
  */
+import org.junit.Test;
+
 import java.io.File;
 import java.net.URL;
 
 public class FileList {
-    public static void main(String[] args) throws Exception {
-        String dirPath = "E:\\Factory3\\workdiary\\trunk\\docs\\20200731发布包\\1436_TA业务统计平台\\sql\\9_init_data";
+    @Test
+    public  void testAddFileNameComment() throws Exception {
+        String dirPath = "C:\\Users\\user\\Documents\\navi\\sql";
         File dir = new File(dirPath);
         if(!dir.exists()){
             throw new Exception("文件目录"+dirPath+"不存在");
@@ -23,6 +26,31 @@ public class FileList {
         for(int i=0;i<files.length;i++){
             File file =files[i];
             System.out.println("--"+file.getName());
+        }
+    }
+
+    @Test
+    public  void testAtFile() throws Exception {
+        String dirPath = "C:\\Users\\user\\Documents\\navi\\sql";
+        File dir = new File(dirPath);
+        if(!dir.exists()){
+            throw new Exception("文件目录"+dirPath+"不存在");
+        }
+        if(!dir.isDirectory()){
+            throw new Exception("文件目录"+dirPath+"不是路径");
+
+        }
+
+        printFilePath(dir);
+    }
+
+    private static void printFilePath(File file){
+        File[] fs = file.listFiles();
+        for(File f:fs){
+            if(f.isDirectory())	//若是目录，则递归打印该目录下的文件
+                printFilePath(f);
+            if(f.isFile())		//若是文件，直接打印
+                System.out.println("@"+f.getAbsolutePath().replace("user","Administrator"));
         }
     }
 

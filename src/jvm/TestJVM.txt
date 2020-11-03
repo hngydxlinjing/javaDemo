@@ -1,0 +1,27 @@
+Compiled from "TestJVM.java"
+public class jvm.TestJVM {
+  public jvm.TestJVM();
+    Code:
+       0: aload_0       
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: return        
+
+  public static void main(java.lang.String[]);
+    Code:
+       0: iconst_1      
+       1: istore_1      
+       2: bipush        6
+       4: istore_2      
+       5: iload_1       
+       6: iload_2       
+       7: invokestatic  #2                  // Method addMethod:(II)I
+      10: pop           
+      11: return        
+
+  public static int addMethod(int, int);
+    Code:
+       0: iload_0       
+       1: iload_1       
+       2: iadd          
+       3: ireturn       
+}
