@@ -9,10 +9,9 @@ import java.sql.Statement;
 public class JDBCUtils {
 
     private static String driver = "oracle.jdbc.OracleDriver";
-    //private static String url = "jdbc:oracle:thin:@127.0.0.1:1521:hs";
-    private static String url = "jdbc:oracle:thin:@127.0.0.1:1521:dao";
-    private static String user = "app_taat";
-    private static String password = "app_taat";
+    private static String url = "jdbc:oracle:thin:@127.0.0.1:1521:test";
+    private static String user = "test";
+    private static String password = "test";
 
     static{
         try {

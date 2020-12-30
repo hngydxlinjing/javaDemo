@@ -12,7 +12,7 @@ import java.net.URL;
 public class FileList {
     @Test
     public  void testAddFileNameComment() throws Exception {
-        String dirPath = "C:\\Users\\user\\Documents\\navi\\sql";
+        String dirPath = "E:\\publish\\taLiqNavi\\20201227\\sql\\9_initdata";
         File dir = new File(dirPath);
         if(!dir.exists()){
             throw new Exception("文件目录"+dirPath+"不存在");
@@ -26,12 +26,14 @@ public class FileList {
         for(int i=0;i<files.length;i++){
             File file =files[i];
             System.out.println("--"+file.getName());
+            //String[] split = file.getName().split(".");
+            //System.out.println("select * from "+file.getName().toLowerCase().replaceAll(".sql","") +";");
         }
     }
 
     @Test
     public  void testAtFile() throws Exception {
-        String dirPath = "C:\\Users\\user\\Documents\\navi\\sql";
+        String dirPath = "E:\\Factory3\\trsfTA\\trunk\\trsfTA\\sql\\9_init";
         File dir = new File(dirPath);
         if(!dir.exists()){
             throw new Exception("文件目录"+dirPath+"不存在");
