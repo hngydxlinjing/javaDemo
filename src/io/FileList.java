@@ -32,6 +32,20 @@ public class FileList {
     }
 
     @Test
+    public void testRenameFile() throws Exception {
+        String dirPath = "E:\\data\\01-任务";
+        File dir = new File(dirPath);
+        if(!dir.exists()){
+            throw new Exception("文件目录"+dirPath+"不存在");
+        }
+        if(!dir.isDirectory()){
+            throw new Exception("文件目录"+dirPath+"不是路径");
+
+        }
+        renameFilePath(dir);
+    }
+
+    @Test
     public  void testAtFile() throws Exception {
         String dirPath = "E:\\Factory3\\trsfTA\\trunk\\trsfTA\\sql\\9_init";
         File dir = new File(dirPath);
@@ -46,6 +60,20 @@ public class FileList {
         printFilePath(dir);
     }
 
+    @Test
+    public  void  fileStruct() throws Exception {
+        String dirPath = "E:\\data\\0-106-资管晚间邮件优化\\导出数据\\20201012";
+        File dir = new File(dirPath);
+        if(!dir.exists()){
+            throw new Exception("文件目录"+dirPath+"不存在");
+        }
+        if(!dir.isDirectory()){
+            throw new Exception("文件目录"+dirPath+"不是路径");
+
+        }
+        getFileName(dir,"--");
+    }
+
     private static void printFilePath(File file){
         File[] fs = file.listFiles();
         for(File f:fs){
@@ -55,6 +83,57 @@ public class FileList {
                 System.out.println("@"+f.getAbsolutePath().replace("user","Administrator"));
         }
     }
+
+    private static void renameFilePath(File file){
+        File[] fs = file.listFiles();
+        String parentPath = file.getAbsolutePath();
+        for(File f:fs){
+            if(f.isDirectory())	{
+               String newPath  =parentPath + "\\Done"+ f.getName();
+               // String newPath  =parentPath + "\\"+ f.getName().replace("DONE","Done");
+                File f2 = new File(newPath);
+                f.renameTo(f2);
+            }
+
+        }
+    }
+
+
+        /**
+         *
+         * @param file 文件
+         * @param c 用于记录制表符
+         */
+        public static void getFileName(File file, String c){
+            /**
+             * 如果是文件夹,打印名称(带上制表符)
+             */
+            if(file.isDirectory()){
+                System.out.println(c + file.getName());
+            }
+            /**
+             * 获取所有子文件
+             */
+            File[] files = file.listFiles();
+            for(File f : files){
+                /**
+                 * 首先加一个制表符
+                 */
+                String temp = "\t"+c;
+                if(f.isDirectory()){
+                    /**
+                     * 如果是文件夹,则进行递归
+                     */
+                    getFileName(f, temp);
+                } else {
+                    /**
+                     * 如果不是文件夹,则直接打印
+                     */
+                    System.out.println(temp + f.getName());
+                }
+            }
+        }
+
 
     /**
      * @author linjing
@@ -85,5 +164,46 @@ public class FileList {
             // 第五种：  获取所有的类路径 包括jar包的路径
             System.out.println(System.getProperty("java.class.path"));
         }
+    }
+
+
+    @Test
+    public void dealSqlBakFile() throws Exception {
+        String dirPath = "E:\\data\\脚本存根";
+        File dir = new File(dirPath);
+
+        if(!dir.exists()){
+            throw new Exception("文件目录"+dirPath+"不存在");
+        }
+        if(!dir.isDirectory()){
+            throw new Exception("文件目录"+dirPath+"不是路径");
+
+        }
+
+        deleteBakFile(dir);
+
+    }
+
+
+    private static void deleteBakFile(File file){
+        File[] fs = file.listFiles();
+        for(File f:fs){
+            if(f.isDirectory())	//若是目录，则递归打印该目录下的文件
+                deleteBakFile(f);
+            if(f.isFile()) {        //若是文件，判断后缀是否为".~sql"
+                System.out.println(f.getName());
+                if(f.getName().endsWith(".~sql")){
+                    deleteFile(f);
+                }
+            }
+
+        }
+    }
+
+    private  static  void  deleteFile(File file){
+        if(file == null){
+            return ;
+        }
+        file.delete();
     }
 }
