@@ -6,14 +6,14 @@ import java.io.*;
 import java.util.Iterator;
 import java.util.Properties;
 
-public class PropertiesDemo02 {
+public class OrderedPropertiesDemo {
 
     @Test
     public void demo(){
         Properties prop = new OrderedProperties();
-        String  filepath = "E:\\data\\0-108-产品代码变更\\产品名称.properties";
-        String oldFundCode = "鸿道新能源定增1号私募投资基金";
-        String newFundCode =  "鸿道新能源定增1号私募投资基金A类";
+        String  filepath = "E:\\data\\0-109-产品代码变更-NBF035\\NBF035产品名称 - 复核.txt";
+        String oldFundCode = "私募工场查理投资一丁雪球私募证券投资基金";
+        String newFundCode =  "私募工场查理投资一丁雪球私募证券投资基金A类";
         try {
             InputStreamReader iStreamReader = new InputStreamReader(new FileInputStream(filepath),"utf-8");
             prop.load(iStreamReader);
@@ -36,7 +36,7 @@ public class PropertiesDemo02 {
                     continue;
                 }
                 System.out.println("update "+ user+"."+tablename + "   set  "+columnname+"  =replace("+columnname+",'"+oldFundCode+"','"+ newFundCode +"')  where "+columnname +" like '%"+oldFundCode+"%';");
-                // System.out.println( user+"."+tablename );
+                //  System.out.println( user+"."+tablename +"."+columnname+" = "+prop.get(key));
 
             }
             iStreamReader.close();

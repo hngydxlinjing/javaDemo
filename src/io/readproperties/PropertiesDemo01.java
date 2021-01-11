@@ -18,7 +18,7 @@ public class PropertiesDemo01 {
     public  void readProperties() {
         //java.util包下专门做properties文件解析的类=》Properties
         Properties properties = new Properties();
-        File file = new File("E:\\data\\0-108-产品代码变更\\dao.properties");
+        File file = new File("E:\\data\\0-109-产品代码变更-NBF035\\NBF035-道之助.txt");
         //判断文件是否存在
         if(file.exists()) {
             InputStream inStream = null;
@@ -37,8 +37,9 @@ public class PropertiesDemo01 {
                     }
                 }
             }
-            String newFundCode =  "GR977A";
-            String oldFundCode = "SGR977";
+
+            String oldFundCode = "NBF035";
+            String newFundCode =  "NBFA35";
             Set<Map.Entry<Object, Object>> entries = properties.entrySet();
             for (Map.Entry<Object, Object> map:
                     entries) {
