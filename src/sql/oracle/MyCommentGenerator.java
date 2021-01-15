@@ -1,4 +1,4 @@
-package dao.jdbc;
+package sql.oracle;
 
 /**
  * @author linjing

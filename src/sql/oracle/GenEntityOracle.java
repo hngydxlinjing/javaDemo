@@ -1,4 +1,4 @@
-package dao.jdbc;
+package sql.oracle;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -14,9 +14,10 @@ import java.util.Date;
 
 public class GenEntityOracle {
 
-    private String packageOutPath = "dao.jdbc.bean";//指定实体生成所在包的路径
+    private String packageOutPath = "com.gjdf.ccworkdiary.app.dto";//指定实体生成所在包的路径
+    private String outPutDir = "E:\\Factory3\\ccworkdiary\\ccworkdiary.dto\\src\\main\\java";//指定实体生成所在包的路径
     private String authorName = "linjing";//作者名字
-    private String tablename = "taat_confirmdata_fundend";//表名
+    private String tablename = "cctz_item";//表名
     private String[] colnames; // 列名数组
     private String[] colTypes; //列名类型数组
     private int[] colSizes; //列名大小数组
@@ -24,10 +25,10 @@ public class GenEntityOracle {
     private boolean f_sql = false; // 是否需要导入包java.sql.*
 
     //数据库连接
-     private static final String URL ="jdbc:oracle:thin:@127.0.0.1:1521:dao";
-     private static final String NAME = "aaa";
-     private static final String PASS = "aaa";
-     private static final String DRIVER ="oracle.jdbc.driver.OracleDriver";
+    private static final String URL ="jdbc:oracle:thin:@127.0.0.1:1521:XE";
+    private static final String NAME = "gjdfppos";
+    private static final String PASS = "gjdfppos";
+    private static final String DRIVER ="oracle.jdbc.driver.OracleDriver";
 
 
     /**
@@ -81,14 +82,23 @@ public class GenEntityOracle {
             String content = parse(colnames,colTypes,colSizes);
 
             try {
-                File directory = new File("");
+                File directory = new File(outPutDir);
                 //System.out.println("绝对路径："+directory.getAbsolutePath());
                 //System.out.println("相对路径："+directory.getCanonicalPath());
-                String path=this.getClass().getResource("").getPath();
+                //String path=this.getClass().getResource("").getPath();
 
 //              String outputPath = directory.getAbsolutePath()+ "/src/"+path.substring(path.lastIndexOf("/com/", path.length()), path.length()) + initcap(tablename) + ".java";
-                String outputPath = directory.getAbsolutePath()+ "/src/"+this.packageOutPath.replace(".", "/")+"/"+initcap(tablename) + ".java";
-                FileWriter fw = new FileWriter(outputPath);
+                String outputPath = directory.getAbsolutePath()+"\\"+this.packageOutPath.replace(".", "\\");
+                String fileName = outputPath+"\\"+initcap(tablename) + ".java";
+                File dir = new File(outputPath);
+                if(!dir.exists()){
+                    dir.mkdirs();
+                }
+                File outputfile = new File(fileName);
+                if(!outputfile.exists()){
+                    outputfile.createNewFile();
+                }
+                FileWriter fw = new FileWriter(fileName);
                 PrintWriter pw = new PrintWriter(fw);
                 pw.println(content);
                 pw.flush();
