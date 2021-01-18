@@ -22,6 +22,13 @@ import java.sql.*;
  *         c.*
  *         from v$session a,v$rollname b,v$transaction c where a.saddr=c.ses_addr and b.usn=c.xidusn
  *         order by c.START_DATE desc;
+ *
+ *
+ * -- Create table
+ * create table TEST_LJ
+ * (
+ *   name VARCHAR2(100)
+ * );
  */
 public class TestDblink {
     @Test
@@ -123,7 +130,7 @@ public class TestDblink {
        /* stmt.close();
         rs.close();
         conn.close();*/
-        System.out.println("dblink查询，设置自动提交事务，oracle会产生事务,会自动释放！！！这点与查询dblink不同，查询dblink不会自动释放！");
+        System.out.println("dblink存储过程，设置自动提交事务，oracle会产生事务,会自动释放！！！这点与查询dblink不同，查询dblink不会自动释放！");
         System.in.read();
     }
 
@@ -141,7 +148,7 @@ public class TestDblink {
        /* stmt.close();
         rs.close();
         conn.close();*/
-        System.out.println("dblink查询，设置显式提交事务，oracle会产生事务,不会自动释放！！！");
+        System.out.println("dblink存储过程，设置显式提交事务，oracle会产生事务,不会自动释放！！！");
         System.in.read();
     }
 
@@ -159,7 +166,7 @@ public class TestDblink {
        /* stmt.close();
         rs.close();
         conn.close();*/
-        System.out.println("dblink查询，设置显式提交事务，且提交，oracle会产生事务,会自动释放！！！");
+        System.out.println("dblink存储过程，设置显式提交事务，且提交，oracle会产生事务,会自动释放！！！");
         System.in.read();
     }
 
@@ -183,7 +190,7 @@ public class TestDblink {
                 System.out.println(name + "  " + pass);
             }
             conn.commit();
-            System.out.println("dblink查询，oracle commit后,会自动释放！！！");
+            System.out.println("dblink视图，oracle commit后,会自动释放！！！");
         }finally {
             stmt2.close();
             rs2.close();
